@@ -560,6 +560,18 @@
         .cta-section p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; }
         .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
 
+        /* Signup form */
+        .signup-section { padding: 60px 0; background: linear-gradient(180deg, rgba(124,58,237,0.03), transparent); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .signup-grid { display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .signup-card { background: var(--bg-card); border: 1px solid var(--border); padding: 28px; border-radius: 12px; }
+        .signup-form label { display: block; font-size: 0.9rem; margin-bottom: 6px; color: var(--text-secondary); }
+        .signup-form input[type="text"], .signup-form input[type="email"], .signup-form input[type="tel"], .signup-form textarea, .signup-form select { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(124,58,237,0.06); background: transparent; color: var(--text-primary); margin-bottom: 12px; font-size: 0.95rem; }
+        .signup-form textarea { min-height: 110px; resize: vertical; }
+        .signup-form .form-row { display: flex; gap: 12px; }
+        .signup-form .form-row .col { flex: 1; }
+        .signup-submit { display:inline-flex; align-items:center; gap:8px; background: linear-gradient(135deg, var(--purple-400), var(--purple-600)); color:#fff; padding:12px 18px; border-radius:10px; border:none; cursor:pointer; font-weight:700; }
+        .signup-note { font-size:0.85rem; color:var(--text-muted); margin-top:8px; }
+        .signup-success { display:none; padding:12px 16px; background: linear-gradient(90deg, rgba(34,197,94,0.08), rgba(34,197,94,0.04)); border:1px solid rgba(34,197,94,0.12); color:#86efac; border-radius:8px; margin-top:12px; }
         /* FAQ */
         .faq-list { max-width: 760px; margin: 0 auto; }
         .faq-item {
@@ -1220,6 +1232,68 @@
         </div>
     </section>
 
+    <!-- Signup / Đăng ký tư vấn -->
+    <section class="signup-section" id="signup">
+        <div class="signup-grid">
+            <div>
+                <div style="text-align:left;">
+                    <div class="section-tag">Đăng ký tư vấn</div>
+                    <h2 class="section-title">Nhận tư vấn miễn phí & demo cá nhân hóa</h2>
+                    <p class="section-subtitle" style="margin:0;">Điền thông tin bên cạnh, đội ngũ của chúng tôi sẽ liên hệ trong vòng 24 giờ để tư vấn và demo phù hợp với nhu cầu của bạn.</p>
+                </div>
+                <div style="margin-top:20px;">
+                    <ul style="list-style:disc;padding-left:20px;color:var(--text-secondary);">
+                        <li>Demo hướng dẫn theo ngành nghề của bạn</li>
+                        <li>Tư vấn lựa chọn gói phù hợp</li>
+                        <li>Giải đáp kỹ thuật & chính sách giá</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="signup-card">
+                <form id="signupForm" class="signup-form" novalidate>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="fullName">Họ & Tên</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="Nguyễn Văn A" required>
+                        </div>
+                        <div class="col">
+                            <label for="company">Công ty (nếu có)</label>
+                            <input type="text" id="company" name="company" placeholder="Tên công ty">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                        </div>
+                        <div class="col">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+84 912 345 678" required>
+                        </div>
+                    </div>
+                    <label for="role">Bạn là</label>
+                    <select id="role" name="role">
+                        <option value="creator">Creator / YouTuber</option>
+                        <option value="business">Doanh nghiệp / Marketing</option>
+                        <option value="educator">Giáo viên / Giảng viên</option>
+                        <option value="other">Khác</option>
+                    </select>
+                    <label for="message">Mô tả ngắn về nhu cầu</label>
+                    <textarea id="message" name="message" placeholder="Bạn muốn tạo thể loại video nào? Mục tiêu?"></textarea>
+                    <div style="display:flex;align-items:center;gap:12px;margin-top:6px;">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent" style="margin:0;font-size:0.9rem;color:var(--text-secondary);">Tôi đồng ý nhận liên hệ từ Tool Video AI TSĐ</label>
+                    </div>
+                    <div style="margin-top:14px;display:flex;gap:12px;align-items:center;">
+                        <button type="submit" class="signup-submit">Yêu cầu tư vấn</button>
+                        <div id="signupSuccess" class="signup-success">Cảm ơn! Chúng tôi đã nhận yêu cầu. Bạn sẽ được liên hệ sớm.</div>
+                    </div>
+                    <div class="signup-note">Hoàn toàn miễn phí — Không cần thẻ tín dụng.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="container">
@@ -1323,6 +1397,39 @@
                 }
             });
         });
+
+        // Signup form handling
+        (function() {
+            const form = document.getElementById('signupForm');
+            const successEl = document.getElementById('signupSuccess');
+            if (!form) return;
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = form.fullName.value.trim();
+                const email = form.email.value.trim();
+                const phone = form.phone.value.trim();
+                const consent = form.consent.checked;
+                if (!name || !email || !phone || !consent) {
+                    alert('Vui lòng điền đầy đủ thông tin và chấp nhận điều khoản.');
+                    return;
+                }
+                const btn = form.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.style.opacity = '0.8';
+                // Simulate async submit — replace with real API call as needed
+                setTimeout(function() {
+                    form.reset();
+                    btn.disabled = false;
+                    btn.style.opacity = '';
+                    if (successEl) {
+                        successEl.style.display = 'block';
+                        setTimeout(function() { successEl.style.display = 'none'; }, 7000);
+                    } else {
+                        alert('Cảm ơn! Chúng tôi đã nhận yêu cầu.');
+                    }
+                }, 800);
+            });
+        })();
     </script>
 </body>
 </html>
