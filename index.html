@@ -1234,63 +1234,39 @@
 
     <!-- Signup / Đăng ký tư vấn -->
     <section class="signup-section" id="signup">
-        <div class="signup-grid">
-            <div>
-                <div style="text-align:left;">
-                    <div class="section-tag">Đăng ký tư vấn</div>
-                    <h2 class="section-title">Nhận tư vấn miễn phí & demo cá nhân hóa</h2>
-                    <p class="section-subtitle" style="margin:0;">Điền thông tin bên cạnh, đội ngũ của chúng tôi sẽ liên hệ trong vòng 24 giờ để tư vấn và demo phù hợp với nhu cầu của bạn.</p>
+        <div class="container" style="text-align:center;">
+            <div class="section-tag">Liên hệ tư vấn</div>
+            <h2 class="section-title">Nhận tư vấn miễn phí ngay hôm nay</h2>
+        </div>
+        <div class="signup-card" style="margin:40px auto 0;max-width:520px;">
+            <form id="signupForm" class="signup-form" novalidate>
+                <div class="col">
+                    <label for="fullName">Họ và tên <span style="color:#ef4444;">*</span></label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Nhập họ và tên của bạn" required>
                 </div>
-                <div style="margin-top:20px;">
-                    <ul style="list-style:disc;padding-left:20px;color:var(--text-secondary);">
-                        <li>Demo hướng dẫn theo ngành nghề của bạn</li>
-                        <li>Tư vấn lựa chọn gói phù hợp</li>
-                        <li>Giải đáp kỹ thuật & chính sách giá</li>
-                    </ul>
+                <div class="col">
+                    <label for="email">Email <span style="color:#ef4444;">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="email@example.com" required>
                 </div>
-            </div>
-            <div class="signup-card">
-                <form id="signupForm" class="signup-form" novalidate>
-                    <div class="form-row">
-                        <div class="col">
-                            <label for="fullName">Họ & Tên</label>
-                            <input type="text" id="fullName" name="fullName" placeholder="Nguyễn Văn A" required>
-                        </div>
-                        <div class="col">
-                            <label for="company">Công ty (nếu có)</label>
-                            <input type="text" id="company" name="company" placeholder="Tên công ty">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="name@example.com" required>
-                        </div>
-                        <div class="col">
-                            <label for="phone">Số điện thoại</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+84 912 345 678" required>
-                        </div>
-                    </div>
-                    <label for="role">Bạn là</label>
-                    <select id="role" name="role">
-                        <option value="creator">Creator / YouTuber</option>
-                        <option value="business">Doanh nghiệp / Marketing</option>
-                        <option value="educator">Giáo viên / Giảng viên</option>
+                <div class="col">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" name="phone" placeholder="0912 345 678">
+                </div>
+                <div class="col">
+                    <label for="service">Dịch vụ quan tâm</label>
+                    <select id="service" name="service">
+                        <option value="">-- Chọn dịch vụ --</option>
+                        <option value="video-ai">Tạo Video AI</option>
+                        <option value="video-editing">Chỉnh sửa Video</option>
+                        <option value="voiceover">Voiceover AI</option>
+                        <option value="subtitling">Phụ đề tự động</option>
                         <option value="other">Khác</option>
                     </select>
-                    <label for="message">Mô tả ngắn về nhu cầu</label>
-                    <textarea id="message" name="message" placeholder="Bạn muốn tạo thể loại video nào? Mục tiêu?"></textarea>
-                    <div style="display:flex;align-items:center;gap:12px;margin-top:6px;">
-                        <input type="checkbox" id="consent" name="consent" required>
-                        <label for="consent" style="margin:0;font-size:0.9rem;color:var(--text-secondary);">Tôi đồng ý nhận liên hệ từ Tool Video AI TSĐ</label>
-                    </div>
-                    <div style="margin-top:14px;display:flex;gap:12px;align-items:center;">
-                        <button type="submit" class="signup-submit">Yêu cầu tư vấn</button>
-                        <div id="signupSuccess" class="signup-success">Cảm ơn! Chúng tôi đã nhận yêu cầu. Bạn sẽ được liên hệ sớm.</div>
-                    </div>
-                    <div class="signup-note">Hoàn toàn miễn phí — Không cần thẻ tín dụng.</div>
-                </form>
-            </div>
+                </div>
+                <div id="signupSuccess" class="signup-success" style="display:none;">Cảm ơn! Chúng tôi đã nhận yêu cầu. Bạn sẽ được liên hệ sớm.</div>
+                <button type="submit" class="signup-submit" style="width:100%;">Đặt Lịch Tư Vấn Miễn Phí</button>
+                <div class="signup-note" style="text-align:center;">Hoàn toàn miễn phí — Không cần thẻ tín dụng.</div>
+            </form>
         </div>
     </section>
 
@@ -1407,16 +1383,13 @@
                 e.preventDefault();
                 const name = form.fullName.value.trim();
                 const email = form.email.value.trim();
-                const phone = form.phone.value.trim();
-                const consent = form.consent.checked;
-                if (!name || !email || !phone || !consent) {
-                    alert('Vui lòng điền đầy đủ thông tin và chấp nhận điều khoản.');
+                if (!name || !email) {
+                    alert('Vui lòng điền họ tên và email.');
                     return;
                 }
                 const btn = form.querySelector('button[type="submit"]');
                 btn.disabled = true;
                 btn.style.opacity = '0.8';
-                // Simulate async submit — replace with real API call as needed
                 setTimeout(function() {
                     form.reset();
                     btn.disabled = false;
@@ -1424,8 +1397,6 @@
                     if (successEl) {
                         successEl.style.display = 'block';
                         setTimeout(function() { successEl.style.display = 'none'; }, 7000);
-                    } else {
-                        alert('Cảm ơn! Chúng tôi đã nhận yêu cầu.');
                     }
                 }, 800);
             });
