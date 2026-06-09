@@ -1383,22 +1383,44 @@
                 e.preventDefault();
                 const name = form.fullName.value.trim();
                 const email = form.email.value.trim();
+                const phone = form.phone.value.trim();
+                const service = form.service.value.trim();
                 if (!name || !email) {
                     alert('Vui lòng điền họ tên và email.');
                     return;
                 }
                 const btn = form.querySelector('button[type="submit"]');
                 btn.disabled = true;
-                btn.style.opacity = '0.8';
-                setTimeout(function() {
+                btn.textContent = 'Đang gửi...';
+                fetch('https://claude-code-shadcn-dashboard-main-l-three.vercel.app/api/customers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        fullName: name,
+                        email: email,
+                        phoneNumber: phone,
+                        'service Name': service
+                    })
+                })
+                .then(function(res) {
+                    if (!res.ok) throw new Error('API error');
+                    return res.json();
+                })
+                .then(function() {
                     form.reset();
-                    btn.disabled = false;
-                    btn.style.opacity = '';
                     if (successEl) {
                         successEl.style.display = 'block';
+                        successEl.textContent = 'Cảm ơn! Chúng tôi đã nhận yêu cầu. Bạn sẽ được liên hệ sớm.';
                         setTimeout(function() { successEl.style.display = 'none'; }, 7000);
                     }
-                }, 800);
+                })
+                .catch(function() {
+                    alert('Đã xảy ra lỗi. Vui lòng thử lại.');
+                })
+                .finally(function() {
+                    btn.disabled = false;
+                    btn.textContent = 'Đặt Lịch Tư Vấn Miễn Phí';
+                });
             });
         })();
     </script>
