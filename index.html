@@ -1399,7 +1399,7 @@
                         fullName: name,
                         email: email,
                         phoneNumber: phone,
-                        'service Name': service
+                        serviceName: service
                     })
                 })
                 .then(function(res) {
@@ -1414,8 +1414,20 @@
                         setTimeout(function() { successEl.style.display = 'none'; }, 7000);
                     }
                 })
-                .catch(function() {
-                    alert('Đã xảy ra lỗi. Vui lòng thử lại.');
+                .catch(function(err) {
+                    console.error('API Error:', err);
+                    var errorMsg = 'Đã xảy ra lỗi khi gửi dữ liệu. Chi tiết: ' + err.message;
+                    if (successEl) {
+                        successEl.style.display = 'block';
+                        successEl.style.color = '#ef4444';
+                        successEl.textContent = errorMsg;
+                        setTimeout(function() {
+                            successEl.style.display = 'none';
+                            successEl.style.color = '';
+                        }, 10000);
+                    } else {
+                        alert(errorMsg);
+                    }
                 })
                 .finally(function() {
                     btn.disabled = false;
